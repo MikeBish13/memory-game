@@ -1,0 +1,92 @@
+body {
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.grid {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  gap: 1px;
+}
+
+.grid-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.grid-item button {
+  font-size: 0px;
+  border: none;
+  border-radius: 50%;
+  background: #152938;
+  color: white;
+  font-weight: bold;
+}
+
+.grid-item button.selected {
+  background: #FDA214;
+  font-size: 44px;
+  pointer-events: none;
+}
+
+.grid-item button.active {
+  font-size: 44px;
+  background: #7191A5;
+  pointer-events: none;
+}
+
+.grid-8 {
+  max-width: 537px;
+}
+
+.grid-8 .grid-item {
+  width: 23%;
+}
+
+.grid-8 .grid-item button {
+  height: 72px;
+  width: 72px;
+}
+
+.grid-18 {
+  max-width: 572px;
+}
+
+.grid-18 .grid-item {
+  width: 16%;
+}
+
+.grid-18 .grid-item button {
+  height: 46px;
+  width: 46px;
+}
+
+button {
+  cursor: pointer;
+}
+
+[data-prefix] {
+  pointer-events: none;
+}
+/*# sourceMappingURL=App.css.map */
