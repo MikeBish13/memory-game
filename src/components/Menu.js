@@ -1,22 +1,22 @@
 import React from 'react'
-import { cleanButtons, doubleAndShuffleArray } from '../helpers/Helpers';
-import { Data } from '../Data';
+import { useStore } from '../Store';
+import {ReactComponent as Logo} from '../images/logo.svg';
+import MobileMenuModal from './MobileMenuModal';
 
-export default function Menu({setMoves, setGameData, setCorrectMatches, setFirst, setSecond, setGameStatus, gridSize}) {
-
-    const restartGame = () => {
-        cleanButtons();
-        setMoves(0);
-        setGameData(doubleAndShuffleArray(Data, gridSize));
-        setCorrectMatches(0);
-        setFirst(undefined);
-        setSecond(undefined);
-      }
+export default function Menu() {
+    const {resetGame, setMenuModal, menuModal, newGame} = useStore();
 
     return (
-        <div>
-            <button onClick={() => restartGame()}>Restart</button>
-            <button onClick={() => setGameStatus('start')}>New Game</button>
-        </div>
+        <>
+            <div className="menu container">
+                <Logo />
+                <button className="btn btn-primary btn-mobile" onClick={() => setMenuModal()}>Menu</button>
+                <div className="menu-buttons">
+                    <button className="btn btn-primary btn-desktop" onClick={() => resetGame()}>Restart</button>
+                    <button className="btn btn-secondary btn-desktop" onClick={() => newGame()}>New Game</button>
+                </div>    
+            </div>
+            {menuModal && <MobileMenuModal />}
+        </>
     )
 }

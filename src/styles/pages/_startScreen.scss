@@ -1,0 +1,70 @@
+.start-screen {
+    background: $clr-dark-gray;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 0 116px;
+    @include mq(tablet) {
+        padding: 169px 0;
+    }
+    @include mq(desktop) {
+        padding: 154px 0 183px;
+    }
+
+    svg {
+        path {
+            fill: $clr-pale;
+        }
+        margin-bottom: 2.8125rem;
+    }
+
+    &-box {
+        background: $clr-pale;
+        width: 85%;
+        max-width: 654px;
+        margin: 0 auto;
+        border-radius: 20px;
+        padding: 1.5rem;
+        @include mq(tablet) {
+            padding: 3.5rem;
+        }
+    }
+}
+
+.selection-box {
+    margin-bottom: 1.5rem;
+    @include mq(tablet) {
+        margin-bottom: 2rem;
+    }
+    &:last-of-type {
+        margin-bottom: 2rem;
+    }
+
+    h3 {
+        color: $clr-light-blue;
+        margin-bottom: 0.6875rem;
+    }
+
+    &-buttons {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        @include mq(tablet) {
+            gap: 30px;
+        }
+
+        button {
+            width: 100%;
+        }
+    }
+}
+
+.player-selection {
+    .selection-box-buttons {
+        @include mq(tablet) {
+            gap: 21px;
+        }
+    }
+}

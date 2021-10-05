@@ -31,3 +31,24 @@ export const confirmMatch = (x) => {
         item.classList.remove('active');
     })
 }
+
+export const displayTime = (time) => {
+    let minutes = Math.floor(time / 60);
+    let seconds = time - minutes * 60;
+    if(seconds < 10) {
+        return `${minutes}:0${seconds}`
+    } else {
+        return `${minutes}:${seconds}`
+    }
+}
+
+export const setMenuButtons = (event, type) => {
+    document.querySelectorAll(`.btn-${type}`).forEach(item => {
+        item.classList.remove('active')
+    });
+    event.target.classList.add('active');
+}
+
+export const removeActiveButtons = () => {
+    document.querySelectorAll('.active').forEach(item => item.classList.remove('active'));
+}

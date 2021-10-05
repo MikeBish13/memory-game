@@ -1,0 +1,100 @@
+.grid-page {
+  background: $clr-pale;
+  margin-top: 4rem;
+  @include mq(tablet) {
+    margin-top: 5.5625rem;
+  }
+  @include mq(tablet) {
+    margin-top: 1.5rem;
+  }
+}
+
+.grid {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 0 auto 6.375rem;
+}
+
+.grid-item {
+  text-align: center;
+  button {
+    border: none;
+    border-radius: 50%;
+    background: $clr-mid-gray;
+    color: $clr-pale;
+    font-weight: bold;
+    transition: all 200ms ease-in;
+    &:hover {
+        background: $clr-mid-blue;
+    }
+    &.selected {
+      background: $clr-yellow;
+      pointer-events: none;
+    }
+    &.active {
+      background: $clr-light-gray;
+      pointer-events: none;
+    }
+  }
+}
+
+.grid-8 {
+  row-gap: 12px;
+  max-width: 538px;
+  .grid-item {
+    width: 23%;
+    button {
+      font-size: 0px;
+      height: 72px;
+      width: 72px;
+      @include mq(tablet) {
+        height: 118px;
+        width: 118px;
+        font-size: 0px;
+      }
+      &.selected {
+        font-size: 40px;
+        @include mq(tablet) {
+            font-size: 56px;
+          }
+      }
+      &.active {
+        font-size: 40px;
+        @include mq(tablet) {
+            font-size: 56px;
+          }
+      }
+    }
+  }
+}
+
+.grid-18 {
+  row-gap: 9px;
+  max-width: 572px;
+  .grid-item {
+    width: 16%;
+    button {
+      font-size: 0px;
+      height: 46px;
+      width: 46px;
+      @include mq(tablet) {
+        height: 82px;
+        width: 82px;
+        font-size: 0px;
+      }
+      &.selected {
+        font-size: 24px;
+        @include mq(tablet) {
+            font-size: 44px;
+          }
+      }
+      &.active {
+        font-size: 24px;
+        @include mq(tablet) {
+            font-size: 44px;
+          }
+      }
+    }
+  }
+}

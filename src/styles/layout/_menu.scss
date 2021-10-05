@@ -1,0 +1,60 @@
+.btn-desktop, .menu-buttons {
+  display: none;
+  @include mq(tablet) {
+    display: inline-block;
+  }
+}
+
+.btn-mobile {
+  @include mq(tablet) {
+    display: none;
+  }
+}
+
+.menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 0;
+  background: $clr-pale;
+
+  &-buttons {
+    @include mq(tablet) {
+      display: flex;
+      gap: 1rem;
+    }
+  }
+
+  @include mq(tablet) {
+    padding: 2rem 0;
+  }
+  @include mq(desktop) {
+    padding: 4.1875rem 0;
+  }
+}
+
+.mobile-menu-modal {
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: $clr-modal-background;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &-container {
+    background: $clr-pale;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem;
+    border-radius: 10px;
+  }
+
+  button {
+    font-size: 18px;
+    padding: 12px 0 14px 0;
+  }
+}

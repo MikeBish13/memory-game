@@ -1,66 +1,94 @@
 import React from 'react'
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import {useStore} from '../Store';
 import FinishModal from './FinishModal';
 import GridItem from './GridItem';
-import { confirmMatch } from '../helpers/Helpers';
+import { confirmMatch, displayTime, removeActiveButtons } from '../helpers/Helpers';
 import Menu from './Menu';
+import PlayerList from './PlayerList';
 
-export default function Grid({mode, setMoves, restartGame, gridSize, gameData, setGameData, correctMatches, setCorrectMatches, moves, setGameStatus}) {
-    const [time, setTime] = useState(0);
-    const [first, setFirst] = useState();
-    const [second, setSecond] = useState();
+
+export default function Grid() {
+    
+    const {gridSize, gameData, increaseMoves, increaseCorrectMatches, correctMatches, increaseTime, time, moves, players, currentPlayer, nextPlayer, setPlayerScore, first, second, setFirst, setSecond} = useStore();
 
     // Start the timer when the game begins and finish when all of the matches have been made
     useEffect(() => {
         let interval = null;
         if (correctMatches !== gridSize) {
             interval = setInterval(() => {
-                setTime(time => time + 1 )
+                increaseTime();
             }, 1000);
         } else {
             clearInterval(interval);
         }
         return () => clearInterval(interval);
-    }, [correctMatches, gridSize]);
+    }, [correctMatches, gridSize, increaseTime]);
 
+
+    const setNextPlayer = () => {
+        nextPlayer();
+    }
 
     const handleSelection = (e) => {
-        // Add clicks to variables
         if (!first) {
             e.target.classList.add('active');
             setFirst(e.target.dataset.id);
         } else if (!second) {
             e.target.classList.add('active');
             setSecond(e.target.dataset.id);
-            setMoves(prevVal => prevVal + 1);
+            increaseMoves();
+            setTimeout(removeActiveButtons, 800);
+            setTimeout(setNextPlayer, 800);
         } else {
-            document.querySelectorAll('.active').forEach(item => item.classList.remove('active'));
             e.target.classList.add('active');
             setFirst(e.target.dataset.id);
             setSecond(undefined);
         }
     }   
+ 
 
     useEffect(() => {
         if((first && second) && (first === second)) {
             confirmMatch(first);
-            setCorrectMatches(prevVal => prevVal + 1);
-        } else {
-            
+            increaseCorrectMatches();
+            if(players.length !== 1) {
+                setPlayerScore(currentPlayer);
+            }
         }
-    }, [first, second, setCorrectMatches])
+    }, [first, second, increaseCorrectMatches])
 
     
 
     return (
-        <div>
-            <Menu setMoves={setMoves} setGameData={setGameData} setCorrectMatches={setCorrectMatches} setFirst={setFirst} setSecond={setSecond} setGameStatus={setGameStatus} gridSize={gridSize}/>
+        <>
+        <Menu />
+        <div className="grid-page container">
             <div className={`grid grid-${gridSize}`}>
             {gameData.map((item, index) => 
-              <GridItem item={item} mode={mode} key={index} handleSelection={handleSelection}/>
+              <GridItem item={item} key={index} handleSelection={handleSelection}/>
             )}
+            </div>  
+            <div className="grid-bottom">
+                {players.length === 1 ?
+                    <div className="single-player-info">
+                        <div className="player-card">
+                            <p>Time</p>
+                            <h2>{displayTime(time)}</h2>
+                        </div>
+                        <div className="player-card">
+                            <p>Moves</p>
+                            <h2>{moves}</h2>
+                        </div>
+                    </div>
+                :
+                <>
+                <PlayerList />
+                </>
+                }
             </div>
-            {correctMatches === gridSize && <FinishModal moves={moves} setGameStatus={setGameStatus} restartGame={restartGame} time={time} setCorrectMatches={setCorrectMatches} setMoves={setMoves}/>}
+            {correctMatches === gridSize && <FinishModal />}
         </div>
+        </>
     )
 }

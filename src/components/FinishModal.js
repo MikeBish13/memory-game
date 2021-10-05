@@ -1,16 +1,35 @@
 import React from 'react'
+import { displayTime } from '../helpers/Helpers';
+import {useStore} from '../Store'
+import PlayerLeaderboard from './PlayerLeaderboard';
 
-export default function FinishModal({moves, setGameStatus, time}) {
-    let minutes = Math.floor(time / 60);
-    let seconds = time - minutes * 60; 
+
+export default function FinishModal() {
+
+    const {moves, time, resetGame, players, newGame} = useStore();
 
     return (
-        <div>
-            <h1>Congratulations! You Won!</h1>
-            <h3>It took you {moves} moves!</h3>
-            <h3>It took you {minutes}:{seconds}!</h3>
-            <button onClick={() => setGameStatus('start')}>Set Up New Game</button>
-            <button>Restart</button>
+        <div className="finish-modal">
+            {players.length === 1 ?
+            <div className="finish-modal-single-player container"> 
+                <h1>You did it!</h1>
+                <p className="game-over-sentence">Game over! Here's how you got on...</p>
+                <div className="time-container">
+                    <p>Time Elapsed</p>
+                    <p className="container-value">{displayTime(time)}</p>
+                </div>
+                <div className="move-container">
+                    <p>Moves Taken</p>
+                    <p className="container-value">{moves}</p>
+                </div>
+                <div className="button-container">
+                    <button className="btn btn-primary" onClick={() => resetGame()}>Restart</button>
+                    <button className="btn btn-secondary" onClick={() => newGame()}>Set Up New Game</button>
+                </div>
+            </div>
+            :
+            <PlayerLeaderboard />
+            }
         </div>
     )
 }
