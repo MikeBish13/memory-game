@@ -49,14 +49,18 @@ export default function Grid() {
  
 
     useEffect(() => {
-        if((first && second) && (first === second)) {
-            confirmMatch(first);
-            increaseCorrectMatches();
-            if(players.length !== 1) {
-                setPlayerScore(currentPlayer);
+        const checkMatch = () => {
+            if((first && second) && (first === second)) {
+                confirmMatch(first);
+                increaseCorrectMatches();
+                if(players.length !== 1) {
+                    setPlayerScore(currentPlayer);
+                }
             }
         }
-    }, [first, second, increaseCorrectMatches])
+        checkMatch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [first, second])
 
     
 
