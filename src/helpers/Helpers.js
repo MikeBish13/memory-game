@@ -51,4 +51,13 @@ export const setMenuButtons = (event, type) => {
 
 export const removeActiveButtons = () => {
     document.querySelectorAll('.active').forEach(item => item.classList.remove('active'));
+    document.querySelectorAll('.grid-item').forEach(item => {
+        item.style.pointerEvents = "auto";
+    })
+}
+
+export const disableButtons = () => {
+    document.querySelectorAll('.grid-item').forEach(item => {
+        item.style.pointerEvents = "none";
+    })
 }

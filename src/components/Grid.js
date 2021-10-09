@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import {useStore} from '../Store';
 import FinishModal from './FinishModal';
 import GridItem from './GridItem';
-import { confirmMatch, displayTime, removeActiveButtons } from '../helpers/Helpers';
+import { confirmMatch, displayTime, removeActiveButtons, disableButtons } from '../helpers/Helpers';
 import Menu from './Menu';
 import PlayerList from './PlayerList';
 
@@ -36,10 +36,11 @@ export default function Grid() {
             setFirst(e.target.dataset.id);
         } else if (!second) {
             e.target.classList.add('active');
+            disableButtons();
             setSecond(e.target.dataset.id);
             increaseMoves();
-            setTimeout(removeActiveButtons, 800);
-            setTimeout(setNextPlayer, 800);
+            setTimeout(removeActiveButtons, 500);
+            setTimeout(setNextPlayer, 500);
         } else {
             e.target.classList.add('active');
             setFirst(e.target.dataset.id);
